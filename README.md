@@ -1,26 +1,60 @@
-﻿# Jarvis-Voice-Assistant
- This project is built on a Modular AI Pipeline that handles data transformation through three distinct stages:
+﻿# Jarvis-Voice-Assistant🤖
+Jarvis is a end-to-end AI Voice Assistant built in Python. It integrates speech recognition, large language models (LLMs), and speech synthesis to create a real-time conversational agent capable of automating web tasks and providing intelligent responses.
 
-Perception Layer (Speech-to-Text): * Utilizes the SpeechRecognition library to capture ambient audio.
+🚀 Core Functionalities
+Wake-Word Activation: Optimized to listen for "Jarvis" before triggering active command processing, preserving API resources.
 
-Implements Wake-word detection ("Jarvis") to trigger the assistant, ensuring privacy and reducing unnecessary API calls.
+Intelligent Logic Routing:
 
-Cognition Layer (Natural Language Processing):
+Deterministic Logic: Instant response for predefined tasks like opening Google, Facebook, LinkedIn, or YouTube.
 
-Deterministic Logic: For speed-critical tasks like opening websites or local music, the system uses a custom routing logic.
+Generative Brain: Powered by OpenAI's GPT-3.5-Turbo for handling complex, open-ended queries.
 
-Generative Intelligence: For open-ended queries, the system interacts with OpenAI’s GPT-3.5-Turbo API. I optimized the system prompt to return concise, "assistant-style" responses to minimize latency.
+Dynamic Music Library: A modular musicLibrary.py mapping voice commands to specific media streams.
 
-Synthesis Layer (Text-to-Speech):
+High-Fidelity TTS: Utilizes Google Text-to-Speech (gTTS) with pygame for smooth, low-latency audio playback.
 
-Converts text responses into natural-sounding speech using gTTS.
+🛠️ Technical Architecture
+The system follows a standard NLP Pipeline:
 
-Uses the pygame mixer for non-blocking audio playback, allowing the system to remain responsive while speaking.
+Speech Recognition: Uses Google’s Web Speech API via the SpeechRecognition library.
 
-🛠 Technical Challenges Overcome
-Latency Optimization: Reduced the delay between "speech" and "response" by implementing specific timeout parameters in the listening loop and using lightweight audio libraries.
+Command Processing: Implements a logical gate that checks for local commands before forwarding requests to the OpenAI API.
 
-Resource Management: Automated the cleanup of temporary multimedia files (temp.mp3) to prevent memory bloat during long sessions.
+Synthesis & Cleanup: Generates a temporary MP3 payload, plays it via the pygame mixer, and ensures system cleanliness by deleting the file immediately after playback.
 
-Security Integration: Secured sensitive API credentials using environment variables (python-dotenv), following industry-standard security practices.
+💻 Tech Stack
+Language: Python 3.10+
+
+APIs: OpenAI (GPT-3.5)
+
+Libraries: gTTS, pygame, SpeechRecognition, pyttsx3, webbrowser
+
+Security: python-dotenv (for Environment Variable management)
+
+📦 Installation & Setup
+Clone the repository:
+
+Bash
+
+git clone https://github.com/ishikajaiswal657/Jarvis-Voice-Assistant.git
+cd Jarvis-Voice-Assistant
+Install dependencies:
+
+Bash
+
+pip install -r requirements.txt
+Configure API Credentials: Create a .env file in the root directory and add your OpenAI secret key:
+
+Code snippet
+
+OPENAI_API_KEY=your_actual_key_here
+Run the Application:
+
+Bash
+
+python main.py
+🛡️ Security
+This project implements Secret Masking. All sensitive API keys are stored in a .env file, which is excluded from version control via .gitignore. This follows industry-standard security practices to prevent credential leakage.
+
 
